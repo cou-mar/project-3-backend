@@ -15,7 +15,13 @@ router.post('/create-new', userController);
 //GET all available events
 router.get('/see-events', userController);
 
-//POST comment on an event
+//POST comment on an event (only non-owners)
 router.post('/see-event/:eventId/comment/add', userController);
+
+//PUT (update) individual event (only owners)
+router.put('/see-event/:eventId/edit', userController);
+
+//DELETE individual event (only owners)
+router.delete('/see-event/:eventId/edit', userController);
 
 module.exports = router;
