@@ -1,8 +1,10 @@
 const signupController = (req, res, next) => {
-    res.send('signup route works');
+    // res.send('signup route works');
 
-    const {email, password, name} = req.body //destructuring
+    //destructuring
+    const {email, password, name} = req.body 
 
+    //guard statement
     if(!name || !email || !password){
         return res.status(400).json({
             error: {
@@ -13,7 +15,7 @@ const signupController = (req, res, next) => {
 };
 
 const loginController = (req, res, next) => {
-    res.send('login route works')
+    // res.send('login route works');
 }
 
 module.exports = { 

@@ -8,6 +8,7 @@ const logger = require('morgan');
 
 const indexRouter = require('./routes/index.routes');
 const authRouter = require('./routes/auth.routes');
+const userRouter = require('./routes/user.routes');
 
 const PORT = process.env.PORT;
 
@@ -21,6 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
+app.use('/user', userRouter);
 
 mongoose.connect(process.env.MONGODB_URI)
     .then(x => {
