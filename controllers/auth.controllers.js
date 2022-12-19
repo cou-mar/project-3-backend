@@ -1,3 +1,7 @@
+const bcryptjs = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const User = require('../models/User.model');
+
 const signupController = (req, res, next) => {
     // res.send('signup route works');
 
@@ -12,6 +16,21 @@ const signupController = (req, res, next) => {
             }
         })
     }
+
+    //password security
+    bcryptjs.hash(password, 10)
+        .then(hashedPassword => {
+            res.send(hashedPassword);
+            return User.create({
+                name,
+                email,
+                password: hashedPassword
+            })
+        })
+        .then(createdUser => {
+            res.json(createdUser)
+        })
+        .catch(err => res.send(err));
 };
 
 const loginController = (req, res, next) => {
