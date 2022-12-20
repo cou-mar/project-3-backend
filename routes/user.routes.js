@@ -1,5 +1,5 @@
 const express = require('express');
-const { userController } = require('../controllers/user.controllers');
+const { userController, createEventController } = require('../controllers/user.controllers');
 
 const router = express.Router();
 
@@ -10,7 +10,7 @@ router.get('/profile', userController);
 router.get('/my-events', userController);
 
 //POST newly created event 
-router.post('/create-new', userController);
+router.post('/create-new', createEventController);
 
 //GET all available events
 router.get('/see-events', userController);

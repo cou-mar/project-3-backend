@@ -1,5 +1,7 @@
 const {Schema, model} = require('mongoose');
 
+
+
 const eventSchema = new Schema({
     title: {
         type: String,
@@ -9,18 +11,10 @@ const eventSchema = new Schema({
         type: String
     },
     address: {
-        street: {
-            type: String
-        },
-        city: {
-            type: String
-        },
-        state: {
-            type: String
-        },
-        zipcode: {
-            type: Number
-        },
+        street: String,
+        city: String,
+        state: String,
+        zipcode: Number
     },
     location: {
         latitude: {
