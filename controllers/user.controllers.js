@@ -1,4 +1,9 @@
 const Event = require('../models/Event.model');
+const KomenService = require('../services/komen.service');
+const PredictHQService = require('../services/predicthq.service');
+
+const komenService = new KomenService();
+const predictHQService = new PredictHQService();
 
 const userController = (req, res, next) => {
     res.send('user routes work')
@@ -29,7 +34,39 @@ const createEventController = (req, res, next) => {
     .catch(err => res.send(err));
 };
 
+//GET all available events
+const allEventsController = (req, res, next) => {
+    // Event.find()
+    //     .then(foundEventsArray => {
+    //         res.send(foundEventsArray)
+    //     })
+    //     .catch( err => res.send(err));
+    Promise.all([
+        komenService.getAllEvents(),
+        predictHQService.getAllEvents()
+    ])
+        .then(([komenArray, predictHQArray]) => {
+            console.log(komenArray.data)
+            console.log(predictHQArray.data)
+
+            //clean up arrays and merge them together with
+            //only the properties that we want
+
+            res.send({
+                komenArray: komenArray.data,
+                predictHQArray: predictHQArray.data
+            })
+        })
+};
+
+const updateEventController = (req, res, next) => {
+    Event.findByIdAndUpdate(req.params.eventId, {
+
+    })
+}
+
 module.exports = {
     userController,
-    createEventController
+    createEventController,
+    allEventsController
 };

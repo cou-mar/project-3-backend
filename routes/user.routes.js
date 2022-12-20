@@ -1,5 +1,5 @@
 const express = require('express');
-const { userController, createEventController } = require('../controllers/user.controllers');
+const { userController, createEventController, allEventsController } = require('../controllers/user.controllers');
 
 const router = express.Router();
 
@@ -13,7 +13,7 @@ router.get('/my-events', userController);
 router.post('/create-new', createEventController);
 
 //GET all available events
-router.get('/see-events', userController);
+router.get('/see-events', allEventsController);
 
 //POST comment on an event (only non-owners)
 router.post('/see-event/:eventId/comment/add', userController);
