@@ -35,15 +35,15 @@ const setFavoriteEventsController = (req, res, next) => {
 
 //POST newly created event
 const createEventController = (req, res, next) => {
-    console.log(req.body);
 
+    console.log("this is payload:", req.payload);
     Event.create({
         title: req.body.title,
         date: req.body.date,
         address: req.body.address,
         location: req.body.location,
         description: req.body.description,
-        owner: req.payload._id
+        owner: req.body.owner
     })
     .then(createdEvent => {
         res.send(createdEvent);
