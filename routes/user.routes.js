@@ -1,5 +1,7 @@
 const express = require('express');
-const { userController, createEventController, allEventsController, updateEventController, deleteEventController, oneEventController, favoriteEventsController } = require('../controllers/user.controllers');
+const { userController, createEventController, allEventsController, updateEventController, deleteEventController, oneEventController, favoriteEventsController, setFavoriteEventsController } = require('../controllers/user.controllers');
+
+const { isAuthenticated } = require('../middleware/jwt.middleware')
 
 const router = express.Router();
 
@@ -9,8 +11,11 @@ router.get('/profile', userController);
 //GET all of user's saved events
 router.get('/my-events', favoriteEventsController);
 
+//GET to save user event
+router.get('/my-events/:eventId', isAuthenticated, setFavoriteEventsController);
+
 //POST newly created event 
-router.post('/create-new', createEventController);
+router.post('/create-event', createEventController);
 
 //GET all available events
 router.get('/see-events', allEventsController);

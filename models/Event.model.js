@@ -1,7 +1,5 @@
 const {Schema, model} = require('mongoose');
 
-
-
 const eventSchema = new Schema({
     title: {
         type: String,
@@ -17,16 +15,13 @@ const eventSchema = new Schema({
         zipcode: Number
     },
     location: {
-        latitude: {
-            type: Number
-        },
-        longitude: {
-            type: Number
-        }
+        latitude: Number,
+        longitude: Number
     },
     description: {
         type: String
-    }
+    },
+    owner: { type: Schema.Types.ObjectId, ref: 'User'}
 },
  {
     timestamps: true,
