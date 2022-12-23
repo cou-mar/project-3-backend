@@ -16,7 +16,8 @@ const app = express();
 
 app.use(logger('dev'));
 app.use(cors({
-    origin: '*'
+    origin: '*',
+    credentials: true
 }))
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
