@@ -12,9 +12,18 @@ const userController = (req, res, next) => {
 
 //GET all of user's saved events
 const favoriteEventsController = (req, res, next) => {
-    Favorite.find()
-        .then(favoriteEventsArray => {
-            res.send(favoriteEventsArray)
+
+    console.log("This is the payload", req.payload)
+    
+    Favorite.find({user: req.payload._id})
+        .populate(
+            {
+                path: 'myEvent',
+                populate: {path: 'title'}
+            }
+        )
+        .then(favoriteEvents => {
+            res.send(favoriteEvents)
         })
         .catch(err => res.send(err));
 }
@@ -35,8 +44,7 @@ const setFavoriteEventsController = (req, res, next) => {
 
 //POST newly created event
 const createEventController = (req, res, next) => {
-
-    console.log("this is payload:", req.payload);
+    // console.log("this is payload:", req.payload);
     Event.create({
         title: req.body.title,
         date: req.body.date,

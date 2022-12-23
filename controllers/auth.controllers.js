@@ -20,6 +20,7 @@ const signupController = (req, res, next) => {
     //password security
     bcryptjs.hash(password, 10)
         .then(hashedPassword => {
+            // console.log("this is the hashed", hashedPassword)
             res.send(hashedPassword);
             return User.create({
                 name,
@@ -28,10 +29,11 @@ const signupController = (req, res, next) => {
             })
         })
         .then(createdUser => {
+            // console.log("NEW USER", createdUser)
             res.json(createdUser)
         })
-        .catch(err => res.send(err));
-};
+        .catch((err) => {console.log(err)});
+    };
 
 const loginController = (req, res, next) => {
     // res.send('login route works');

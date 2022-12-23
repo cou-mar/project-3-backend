@@ -11,7 +11,6 @@ const indexRouter = require('./routes/index.routes');
 const authRouter = require('./routes/auth.routes');
 const userRouter = require('./routes/user.routes');
 
-const PORT = process.env.PORT;
 
 const app = express();
 
